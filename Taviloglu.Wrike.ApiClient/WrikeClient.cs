@@ -332,7 +332,16 @@ namespace Taviloglu.Wrike.ApiClient
             JsonConverter jsonConverter = null)
         {
             HttpResponseMessage responseMessage = null;
-            Console.WriteLine(httpContent.ReadAsStringAsync().Result);
+
+            if(_httpClient == null)
+            {
+                throw new Exception("HttpClient is not initialized!");
+            } else
+            {
+                Console.WriteLine("HttpClient is initialized!");
+            }
+
+
             switch (httpMethod)
             {
                 case HttpMethods.Get:
