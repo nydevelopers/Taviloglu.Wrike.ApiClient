@@ -69,6 +69,7 @@ namespace Taviloglu.Wrike.ApiClient
         /// <param name="nextPageToken">Next page token, overrides any other parameters in request</param>
         /// <param name="metadata">Task metadata filter</param>
         /// <param name="customField">Custom field filter</param>
+        /// <param name="customFields">Custom fields filter</param>
         /// <param name="customStatuses">Custom statuses filter</param>
         /// <param name="fields">optional fields to be included in the response model 
         /// Use <see cref="WrikeTask.OptionalFields"/></param>
@@ -98,6 +99,7 @@ namespace Taviloglu.Wrike.ApiClient
             string nextPageToken = null,
             WrikeMetadata metadata = null,
             WrikeCustomFieldData customField = null,
+            List<WrikeCustomFieldData> customFields = null,
             List<string> customStatuses = null,
             List<string> fields = null);
 
