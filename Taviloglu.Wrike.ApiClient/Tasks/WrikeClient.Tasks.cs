@@ -69,7 +69,7 @@ namespace Taviloglu.Wrike.ApiClient
             return GetReponseDataFirstItem(response);
         }
 
-        async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(string folderId, bool? addDescendants, string title, WrikeTaskStatus? status, WrikeTaskImportance? importance, IWrikeDateFilter startDate, IWrikeDateFilter dueDate, IWrikeDateFilter scheduledDate, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, WrikeDateFilterRange completedDate, List<string> authors, List<string> responsibles, List<string> shareds, string permalink, WrikeTaskDateType? type, int? limit, WrikeTaskSortField? sortField, WrikeSortOrder? sortOrder, bool? addSubTasks, int? pageSize, string nextPageToken, WrikeMetadata metadata, WrikeCustomFieldData customField, List<string> customStatuses, List<string> fields)
+        async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(string folderId, bool? addDescendants, string title, WrikeTaskStatus? status, WrikeTaskImportance? importance, IWrikeDateFilter startDate, IWrikeDateFilter dueDate, IWrikeDateFilter scheduledDate, WrikeDateFilterRange createdDate, WrikeDateFilterRange updatedDate, WrikeDateFilterRange completedDate, List<string> authors, List<string> responsibles, List<string> shareds, string permalink, WrikeTaskDateType? type, int? limit, WrikeTaskSortField? sortField, WrikeSortOrder? sortOrder, bool? addSubTasks, int? pageSize, string nextPageToken, WrikeMetadata metadata, WrikeCustomFieldData customField, List<WrikeCustomFieldData> customFields, List<string> customStatuses, List<string> fields)
         {
             var requestUri = "tasks";
 
@@ -102,6 +102,7 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("nextPageToken", nextPageToken)
             .AddParameter("metadata", metadata)
             .AddParameter("customField", customField)
+            .AddParameter("customFields", customFields)
             .AddParameter("customStatuses", customStatuses)
             .AddParameter("fields", fields);
 
