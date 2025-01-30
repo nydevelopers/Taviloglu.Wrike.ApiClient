@@ -58,7 +58,7 @@ namespace Taviloglu.Wrike.ApiClient
             {
                 postDataBuilder.AddParameter("customStatus", newTask.CustomStatusId);
             }
-            
+
             var response = await SendRequest<WrikeTask>($"folders/{folderId}/tasks", HttpMethods.Post, postDataBuilder.GetContent()).ConfigureAwait(false);
             return GetReponseDataFirstItem(response);
         }
@@ -107,31 +107,32 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("fields", fields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
-            
+
             _lastResponseSize = response.ResponseSize;
             _lastNextPageToken = response.NextPageToken;
-            
+
 
             return GetReponseDataList(response);
         }
 
         async Task<List<WrikeTask>> IWrikeTasksClient.GetAsync(WrikeClientIdListParameter taskIds, List<string> optionalFields)
         {
-            var supportedOptionalFields = new List<string> { 
-                WrikeTask.OptionalFields.Recurrent, 
+            var supportedOptionalFields = new List<string> {
+                WrikeTask.OptionalFields.Recurrent,
                 WrikeTask.OptionalFields.AttachmentCount,
-                WrikeTask.OptionalFields.EffortAllocation
+                WrikeTask.OptionalFields.EffortAllocation,
+                WrikeTask.OptionalFields.CustomItemTypeId
             };
 
             if (optionalFields != null &&
-                (optionalFields.Count > 3 ||
+                (optionalFields.Count > 4 ||
                 optionalFields.Any(o => !supportedOptionalFields.Contains(o))))
             {
-                throw new ArgumentOutOfRangeException(nameof(optionalFields),"Only Recurrent, AttachmentCount and EffortAllocation is supported.");
+                throw new ArgumentOutOfRangeException(nameof(optionalFields), "Only Recurrent, AttachmentCount, EffortAllocation, CustomItemTypeId is supported.");
             }
 
             var uriBuilder = new WrikeUriBuilder($"tasks/{taskIds}")
-                .AddParameter("fields",optionalFields);
+                .AddParameter("fields", optionalFields);
 
             var response = await SendRequest<WrikeTask>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
 
